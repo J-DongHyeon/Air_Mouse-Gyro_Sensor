@@ -2,38 +2,30 @@
 #include <HID.h>
 
 String data;
-double gyX, gyY;
+int gyX, gyZ;
 int8_t mouseX, mouseY;
-const boolean END = HIGH;
-const int END_PIN = 7;
 
 void setup() {
-  Serial1.begin(115200);
-  pinMode(END_PIN, INPUT);
+  Serial1.begin(9600);
   Mouse.begin();
-  
   
 }
 
 void loop() {
  if (Serial1.available() > 0) {
-//  get_data();
-//  mouse_cont();
-
-  if (digitalRead(END_PIN) == END) {
-    Mouse.end();
-    exit(0);
-  }
+  get_data();
+  mouse_cont();
   
  }
-
- 
-
 
 }
 
 void get_data() {
   data = Serial1.readStringUntil('\n');
+
+  if (data == "END") {
+    exit(0);
+  }
   
   int idx1 = data.indexOf(",");
   int idx2 = data.indexOf(",", idx1+1);
@@ -41,13 +33,13 @@ void get_data() {
   String gyY_str = data.substring(idx1+1, idx2);
   String gyZ_str = data.substring(idx2+1);
   
-  gyX = gyX_str.toDouble();
-  gyY = gyY_str.toDouble();
+  gyX = - ((int) (gyX_str.toDouble())) / 2;
+  gyZ = - ((int) (gyZ_str.toDouble())) / 2;
 }
 
 void mouse_cont() {
-  mouseX = map(gyX, -250, 250, -127, 127);
-  mouseY = map(gyY, -250, 250, -127, 127);
+  mouseX = constrain(gyZ, -128, 127);
+  mouseY = constrain(gyX, -128, 127);
 
   Mouse.move(mouseX, mouseY, 0);
 }

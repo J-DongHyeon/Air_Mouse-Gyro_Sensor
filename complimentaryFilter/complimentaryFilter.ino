@@ -17,7 +17,7 @@ const int END_PIN = 7;
 void setup() {
   setting();
   ave_cal();
-  Serial.begin(115200);
+  Serial.begin(9600);
   past = millis();
 
   pinMode(END_PIN, INPUT);
