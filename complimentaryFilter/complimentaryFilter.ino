@@ -31,9 +31,6 @@ void loop() {
 
   getDT();
   
-//  Serial.print("X축 가속도 : "); Serial.print(acX_cal); Serial.print("\t");
-//  Serial.print("Y축 가속도 : "); Serial.print(acY_cal); Serial.print("\t");
-//  Serial.print("Z축 가속도 : "); Serial.println(acZ_cal);
 
 //  Serial.print("X축 각속도 : "); Serial.print(gyX_cal); Serial.print("\t");
 //  Serial.print("Y축 각속도 : "); Serial.print(gyY_cal); Serial.print("\t");
