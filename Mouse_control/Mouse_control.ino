@@ -23,18 +23,20 @@ void loop() {
 void get_data() {
   data = Serial1.readStringUntil('\n');
 
-  if (data == "END") {
-    return;
+  int idx = data.indexOf(",");
+  String gyX_str = data.substring(0, idx);
+  String gyZ_str = data.substring(idx+1);
+  
+  gyX = - (int) (gyX_str.toDouble() / 1.5);
+  gyZ = - (int) (gyZ_str.toDouble() / 1.5);
+
+  if (-3 < gyZ && 3 > gyZ) {
+    gyZ = 0;
   }
-  
-  int idx1 = data.indexOf(",");
-  int idx2 = data.indexOf(",", idx1+1);
-  String gyX_str = data.substring(0, idx1);
-  String gyY_str = data.substring(idx1+1, idx2);
-  String gyZ_str = data.substring(idx2+1);
-  
-  gyX = - ((int) (gyX_str.toDouble())) / 2;
-  gyZ = - ((int) (gyZ_str.toDouble())) / 2;
+
+  if (-3 < gyX && 3 > gyX) {
+    gyX = 0;
+  }
 }
 
 void mouse_cont() {

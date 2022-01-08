@@ -11,9 +11,6 @@ unsigned long now = 0;
 unsigned long past = 0;
 double dt = 0;
 
-const boolean END = true;
-const int END_PIN = 7;
-
 
 void setup() {
   setting();
@@ -21,11 +18,11 @@ void setup() {
   Serial.begin(9600);
   past = millis();
 
-  pinMode(END_PIN, INPUT);
-
 }
 
 void loop() {
+
+  
   getData();
 
   gyX -= ave_gyX; gyY -= ave_gyY; gyZ -= ave_gyZ;
@@ -42,17 +39,7 @@ void loop() {
 //  Serial.print("Z축 각속도 : "); Serial.println(gyZ_cal);
 
   Serial.print(gyX_cal); Serial.print(",");
-  Serial.print(gyY_cal); Serial.print(",");
   Serial.println(gyZ_cal);
-
-  if (digitalRead(END_PIN) == END) {
-    while(true) {
-      if (digitalRead(END_PIN) == LOW) {
-        break;
-      }
-    }
-  }
-
 
 }
 
