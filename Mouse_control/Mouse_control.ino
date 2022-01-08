@@ -23,6 +23,9 @@ void loop() {
 void get_data() {
   data = Serial1.readStringUntil('\n');
 
+  if (data == "END") {
+    return;
+  }
   
   int idx1 = data.indexOf(",");
   int idx2 = data.indexOf(",", idx1+1);
