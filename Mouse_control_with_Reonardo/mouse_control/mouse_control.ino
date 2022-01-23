@@ -19,6 +19,8 @@ unsigned bt_Lpush, bt_Rpush;
 const int L_BUTTON = 13;
 const int R_BUTTON = 12;
 
+float wheel_div = 6;
+
 int8_t mouseX, mouseY;
 
 
@@ -51,8 +53,8 @@ void loop() {
 //  Serial.print("Y축 각속도 : "); Serial.print(gyY_cal); Serial.print("\t");
 //  Serial.print("Z축 각속도 : "); Serial.println(gyZ_cal);
 
-  gyX_cal = - (int) (gyX_cal / 6);
-  gyZ_cal = - (int) (gyZ_cal / 6);
+  gyX_cal = - (int) (gyX_cal / wheel_div);
+  gyZ_cal = - (int) (gyZ_cal / wheel_div);
 
   mouse_cont();
   button_cont();
@@ -100,6 +102,8 @@ void mouse_cont() {
   mouseY = constrain(gyX_cal, -128, 127);
 
   Mouse.move(mouseX, mouseY, 0);
+
+  wheel_div = analogRead(A0) * 12 / 1023;
 }
 
 void button_cont() {
