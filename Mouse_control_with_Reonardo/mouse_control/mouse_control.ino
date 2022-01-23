@@ -13,6 +13,12 @@ unsigned long now = 0;
 unsigned long past = 0;
 double dt = 0;
 
+boolean bt_Lnow, bt_Rnow, bt_Lpast, bt_Rpast, bt_Lstate, bt_Rstate;
+unsigned bt_Lpush, bt_Rpush;
+
+const int L_BUTTON = 13;
+const int R_BUTTON = 12;
+
 int8_t mouseX, mouseY;
 
 
@@ -23,11 +29,12 @@ void setup() {
   past = millis();
 
   Mouse.begin();
+  pinMode(L_BUTTON, INPUT);
+  pinMode(R_BUTTON, INPUT);
 
 }
 
 void loop() {
-
   
   getData();
 
@@ -44,10 +51,11 @@ void loop() {
 //  Serial.print("Y축 각속도 : "); Serial.print(gyY_cal); Serial.print("\t");
 //  Serial.print("Z축 각속도 : "); Serial.println(gyZ_cal);
 
-  gyX_cal = - (int) (gyX_cal / 3.8);
-  gyZ_cal = - (int) (gyZ_cal / 3.8);
+  gyX_cal = - (int) (gyX_cal / 3.9);
+  gyZ_cal = - (int) (gyZ_cal / 3.9);
 
   mouse_cont();
+  button_cont();
 
 }
 
@@ -92,4 +100,40 @@ void mouse_cont() {
   mouseY = constrain(gyX_cal, -128, 127);
 
   Mouse.move(mouseX, mouseY, 0);
+}
+
+void button_cont() {
+
+  bt_Lnow = digitalRead(L_BUTTON);
+  bt_Rnow = digitalRead(R_BUTTON);
+
+  if (bt_Lnow != bt_Lpast) {
+    bt_Lpush = millis();
+  }
+
+  if (bt_Rnow != bt_Rpast) {
+    bt_Rpush = millis();
+  }
+
+  if (millis() - bt_Lpush > 50) {
+    if (bt_Lstate != bt_Lnow) {
+      bt_Lstate = bt_Lnow;
+      if (bt_Lstate == HIGH) {
+        Mouse.click(MOUSE_LEFT);
+      }
+    }
+  }
+
+  if (millis() - bt_Rpush > 50) {
+    if (bt_Rstate != bt_Rnow) {
+      bt_Rstate = bt_Rnow;
+      if (bt_Rstate == HIGH) {
+        Mouse.click(MOUSE_RIGHT);
+      }
+    }
+  }
+
+  bt_Lpast = bt_Lnow;
+  bt_Rpast = bt_Rnow;
+  
 }
