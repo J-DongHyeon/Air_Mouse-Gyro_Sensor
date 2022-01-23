@@ -13,11 +13,12 @@ unsigned long now = 0;
 unsigned long past = 0;
 double dt = 0;
 
-boolean bt_Lnow, bt_Rnow, bt_Lpast, bt_Rpast, bt_Lstate, bt_Rstate;
-unsigned bt_Lpush, bt_Rpush;
+boolean bt_Lnow, bt_Dnow, bt_Rnow, bt_Lpast, bt_Dpast, bt_Rpast, bt_Lstate, bt_Dstate, bt_Rstate;
+unsigned bt_Lpush, bt_Dpush, bt_Rpush;
 
 const int L_BUTTON = 13;
-const int R_BUTTON = 12;
+const int D_BUTTON = 12;
+const int R_BUTTON = 11;
 
 float wheel_div = 6;
 
@@ -109,10 +110,15 @@ void mouse_cont() {
 void button_cont() {
 
   bt_Lnow = digitalRead(L_BUTTON);
+  bt_Dnow = digitalRead(D_BUTTON);
   bt_Rnow = digitalRead(R_BUTTON);
 
   if (bt_Lnow != bt_Lpast) {
     bt_Lpush = millis();
+  }
+
+  if (bt_Dnow != bt_Dpast) {
+    bt_Dpush = millis();
   }
 
   if (bt_Rnow != bt_Rpast) {
@@ -130,6 +136,18 @@ void button_cont() {
     }
   }
 
+
+  if (millis() - bt_Dpush > 50) {
+    if (bt_Dstate != bt_Dnow) {
+      bt_Dstate = bt_Dnow;
+      if (bt_Dstate == HIGH) {
+        Mouse.click(MOUSE_LEFT);
+        Mouse.click(MOUSE_LEFT);
+      }
+    }
+  }
+
+
   if (millis() - bt_Rpush > 50) {
     if (bt_Rstate != bt_Rnow) {
       bt_Rstate = bt_Rnow;
@@ -142,6 +160,7 @@ void button_cont() {
   }
 
   bt_Lpast = bt_Lnow;
+  bt_Dpast = bt_Dnow;
   bt_Rpast = bt_Rnow;
 
   
