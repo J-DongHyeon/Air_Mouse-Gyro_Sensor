@@ -54,8 +54,8 @@ void loop() {
 //  Serial.print("Y축 각속도 : "); Serial.print(gyY_cal); Serial.print("\t");
 //  Serial.print("Z축 각속도 : "); Serial.println(gyZ_cal);
 
-  gyX_cal = - (int) (gyX_cal / wheel_div);
-  gyZ_cal = - (int) (gyZ_cal / wheel_div);
+  gyX_cal = - (gyX_cal / wheel_div);
+  gyZ_cal = - (gyZ_cal / wheel_div);
 
   mouse_cont();
   button_cont();
