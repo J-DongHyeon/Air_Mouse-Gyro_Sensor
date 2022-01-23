@@ -51,8 +51,8 @@ void loop() {
 //  Serial.print("Y축 각속도 : "); Serial.print(gyY_cal); Serial.print("\t");
 //  Serial.print("Z축 각속도 : "); Serial.println(gyZ_cal);
 
-  gyX_cal = - (int) (gyX_cal / 3.9);
-  gyZ_cal = - (int) (gyZ_cal / 3.9);
+  gyX_cal = - (int) (gyX_cal / 6);
+  gyZ_cal = - (int) (gyZ_cal / 6);
 
   mouse_cont();
   button_cont();
@@ -119,7 +119,9 @@ void button_cont() {
     if (bt_Lstate != bt_Lnow) {
       bt_Lstate = bt_Lnow;
       if (bt_Lstate == HIGH) {
-        Mouse.click(MOUSE_LEFT);
+        Mouse.press(MOUSE_LEFT);
+      } else if (bt_Lstate == LOW) {
+        Mouse.release(MOUSE_LEFT);
       }
     }
   }
@@ -128,12 +130,16 @@ void button_cont() {
     if (bt_Rstate != bt_Rnow) {
       bt_Rstate = bt_Rnow;
       if (bt_Rstate == HIGH) {
-        Mouse.click(MOUSE_RIGHT);
+        Mouse.press(MOUSE_RIGHT);
+      } else if (bt_Rstate == LOW) {
+        Mouse.release(MOUSE_RIGHT);
       }
     }
   }
 
   bt_Lpast = bt_Lnow;
   bt_Rpast = bt_Rnow;
+
+  
   
 }
