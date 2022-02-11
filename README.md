@@ -44,5 +44,3 @@
 ![ezgif com-gif-maker (13)](https://user-images.githubusercontent.com/86474141/153619403-48896342-cc71-49cc-ad53-b9442dd25513.gif)
 
 
-https://user-images.githubusercontent.com/86474141/153619517-2824626d-767c-4d57-b280-d818bc94734e.mp4
-
