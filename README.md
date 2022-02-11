@@ -21,12 +21,15 @@
 
 ### 회로도
 <img width="525" alt="2022-02-11 23;42;17" src="https://user-images.githubusercontent.com/86474141/153612426-43d47189-f7e1-48b8-87ae-2da279a00383.PNG">
+
 ### 연결 사진
-![KakaoTalk_20220212_001229311](https://user-images.githubusercontent.com/86474141/153617876-fea8b67a-3135-47e5-a876-fd101892e445.jpg)
+
+![KakaoTalk_20220212_001229311](https://user-images.githubusercontent.com/86474141/153618660-6f1cdc85-c185-4b67-806b-9d827410e038.jpg)
 
 ### 추가 사항
 #### 1. 더블 클릭 기능의 버튼을 추가하였다.
 > 공중에서 클릭을 하기 때문에 클릭할 때 마다 마우스에 미세한 흔들림이 있다. 따라서 좌클릭을 빠르게 두 번 하는 것이 힘드므로 더블 클릭 버튼을 추가로 만들었다.
 #### 2. Potentiometer를 추가함으로써 마우스의 감도 조절을 가능하도록 하였다.
 
-![KakaoTalk_20220212_001229311](https://user-images.githubusercontent.com/86474141/153618054-f8f99daf-39ea-4c08-ad4b-5e280cdb3106.jpg)
+
+
