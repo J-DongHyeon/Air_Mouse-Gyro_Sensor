@@ -13,7 +13,7 @@
 # 1. 기획 계기
 
 <p align= "center">
-<img src=/docs/readme_Imgs/readme_img2.PNG width=550 height=300></p> 
+<img src=/docs/readme_Imgs/readme_img2.PNG width=500 height=250></p> 
 
 > &nbsp;`Arduino UNO 보드` 를 이용하여 여러 센서들을 테스트 해보던 중, `MPU 6050 센서` 를 연결하여 테스트 할 때 흥미로웠다. 나의 움직임을 측정하여 3축 각속도, 가속도 값을 출력해내고, 이를 조금 가공하여 각도까지 계산해 내는 과정이 신기하였다. 이를 실생활에 적용 시켜서 시간을 들여 하나의 프로젝트를 만들면 재미있겠다는 생각이 들었다. <br><br>
 > &nbsp;MPU 6050 센서 사용법을 익힐 겸, 재미있는 프로젝트를 진행할 겸 `Air Mouse` 를 만들기 위한 구상을 하였고, 이를 구현하기 위해 본 프로젝트를 진행하였다.
