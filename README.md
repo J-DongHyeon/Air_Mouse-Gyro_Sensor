@@ -32,24 +32,31 @@
     - 첫 번째 문제 해결
     > &nbsp; 결론적으로, UNO 보드로 마우스 입력장치 처리를 하려면 ATMega 16u2 에 파일을 업로드 할 수 있어야 한다. ATMega 16u2 를 프로그래밍 가능한 상태로 만들기 위해서 `HoodLoader2 부트로더` 를 이용하였다. HoodLoader2 는 `CDC 부트로더` 와 `고속 USB 시리얼 브릿지` 로 구성된다. CDC 부트로더는 ATMega 16u2 MCU에도 프로그래밍이 가능하도록 하는 기능을 하고, 고속 USB 시리얼 브릿지는 컴퓨터와 ATMega 328 간의 USB to Serial 통신을 담당한다. <br>
     > &nbsp; 쉽게 말하면, ATMega 16u2 의 기본 기능인 USB to Serial 기능은 그대로 존재하고, 추가적으로 ATMega 16u2 에도 프로그래밍이 가능하게 됐다는 것이다. <br>
-    > &bnsp; ATMega 16u2 의 기존 부트로더를 HoodLoader2 부트로더로 변경하는 과정은 `https://luftaquila.io/blog/diy/arduino-hid-control-1/` 를 참고하였다.
+    > &nbsp; ATMega 16u2 의 기존 부트로더를 HoodLoader2 부트로더로 변경하는 과정은 `https://luftaquila.io/blog/diy/arduino-hid-control-1/` 를 참고하였다.
 
+  첫 번째 문제를 해결하고 ATMega 16u2 에도 프로그래밍이 가능하게 됨으로써, UNO 보드로 컴퓨터 마우스 움직임 처리가 가능해졌다. <br>
+    > 1. 공중에서 손으로 MPU 6050 센서를 잡고 움직인다. <br>
+    > 2. ATMega 328 은 MPU 6050 으로부터 손목의 X축, Z축 (상하, 좌우) 각속도 데이터를 받아 가공하고, 이 값을 하드웨어 시리얼로 ATMega 16u2 로 전송한다. <br>
+    > 3. ATMega 16u2 는 하드웨어 시리얼로 받은 각속도 데이터에 비례하여 마우스 움직임을 제어하도록 하였다.
+  
+  - ### UNO 보드로 컴퓨터 마우스 움직임을 제어하는 결과 영상
 
-#### 1. 손목에 자이로 센서를 부착
-#### 2. 자이로 센서를 이용하여 손목의 움직임 각속도를 측정, 계산
-#### 3. 각속도 데이터를 이용하여 마우스 커서 움직임을 제어
------------------
+<p align= "center">
+<img src=https://user-images.githubusercontent.com/86474141/148759700-b6fd94bd-7db5-47ec-9e0b-c75fb3f35f6d.gif width=400 height=250></p> 
 
-### 아두이노 우노 보드를 이용하여 일단 마우스 움직임만 제어하고자 함
-#### 1. HoodLoader2 라이브러리를 USB MCU에 올림으로써 CDC bootloader와 Fast USB-Serial Bridge 간 스위치가 가능하도록 함
-#### 2. I/O MCU 업로드 : 자이로 센서로부터 손목 움직임 각속도 데이터 추출, 가공 후 USB MCU에 시리얼 통신 전송
-#### (I/O MCU로는 USB HID 장치로 인식이 되지 않기 때문에 마우스 제어 불가)
-#### 3. USB MCU 업로드 : 손목 움직임 각속도 데이터를 시리얼 통신 수신 후 이를 이용하여 마우스 제어
+-
+  -
+    - 문제점 2.
+    > &nbsp; ATMega 16u2 는 UNO 보드의 I/O 핀들을 직접 제어할 수가 없다. 단지, ATMega 328 이 I/O 핀들에 대해 처리한 데이터만 하드웨어 시리얼으로 받을 수 있다. 게다가, ATMega 16u2 와 ATMega 328 간 연결된 하드웨어 시리얼은 1쌍 뿐이므로 굉장히 제한적이다. <br>
+    > &nbsp; 위에서, UNO 보드로 마우스 움직임을 제어한 것을 보면 ATMega 16u2 와 ATMega 328 간의 하드웨어 시리얼은 각속도 데이터를 전송하는 용도로 사용하고 있다. 만약, 마우스 클릭을 구현하기 위해 버튼을 I/O 핀에 연결한다 했을 때, 이 버튼 신호를 ATMega 16u2 에 전송할 방법이 제한적이다. <br>
+    > &nbsp; 즉, UNO 보드로 마우스 움직임 제어는 가능하겠지만, 마우스 클릭에 대한 처리는 힘들다고 볼 수 있다. 
+    
+    - 두 번째 문제 해결
+    > &nbsp; UNO 보드로는 마우스 입력장치 제어를 완전히 할 수 없다는 판단이 들었다. <br>
+    > &nbsp; 다른 MCU를 사용하는 보드를 찾던 도중 `ATMega 32u4 MCU` 를 사용하는 `Leonardo 보드` 를 찾게 되었고, 이 보드를 이용하여 `Air Mouse` 제작을 시도하였다.
 
-![ezgif com-gif-maker (12)](https://user-images.githubusercontent.com/86474141/148759700-b6fd94bd-7db5-47ec-9e0b-c75fb3f35f6d.gif)
+- ## 시나리오 2.
 
-
-#### 4. 한계점 : USB MCU는 I/O MCU와의 시리얼 통신만 가능할 뿐, I/O핀들을 사용할 수가 없다. 따라서 마우스 클릭 이벤트에 대한 처리를 마땅히 할 수가 없다.
 
 ----------------------
 
