@@ -2,9 +2,10 @@
 <h1 align="center"> Air Mouse </h1>
 
 <h4 align="center"> 공중에서 손목 움직임만으로 마우스를 제어하는 Air Mouse 제작 </h4>
+<br>
 
 <p align= "center">
-<img src=/docs/readme_Imgs/readme_img1.PNG width=600 height=400></p> 
+<img src=/docs/readme_Imgs/readme_img1.PNG width=550 height=350></p> 
 </br></br>
 
 ------------------------------------------
@@ -39,7 +40,7 @@
     > 2. ATMega 328 은 MPU 6050 으로부터 손목의 X축, Z축 (상하, 좌우) 각속도 데이터를 받아 가공하고, 이 값을 하드웨어 시리얼로 ATMega 16u2 로 전송한다. <br>
     > 3. ATMega 16u2 는 하드웨어 시리얼로 받은 각속도 데이터에 비례하여 마우스 움직임을 제어하도록 하였다.
   
-  - ### UNO 보드로 컴퓨터 마우스 움직임을 제어하는 결과 영상
+  - ### UNO 보드로 컴퓨터 마우스 움직임을 제어하는 시연 영상
 
 <p align= "center">
 <img src=https://user-images.githubusercontent.com/86474141/148759700-b6fd94bd-7db5-47ec-9e0b-c75fb3f35f6d.gif width=400 height=250></p> 
