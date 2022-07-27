@@ -89,7 +89,7 @@
 
 - ## 회로도 구상
 <p align= "center">
-<img width=450 height=300 src="https://user-images.githubusercontent.com/86474141/153612426-43d47189-f7e1-48b8-87ae-2da279a00383.PNG"></p>
+<img width=450 height=300 src=/docs/readme_Imgs/readme_img5.PNG></p>
 </br>
 
 - ## 실제 연결 모습
