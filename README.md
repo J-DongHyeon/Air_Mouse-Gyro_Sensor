@@ -32,7 +32,7 @@
    
     - 첫 번째 문제 해결
     > &nbsp; 결론적으로, UNO 보드로 마우스 입력장치 처리를 하려면 ATMega 16u2 에 파일을 업로드 할 수 있어야 한다. ATMega 16u2 를 프로그래밍 가능한 상태로 만들기 위해서 `HoodLoader2 부트로더` 를 이용하였다. HoodLoader2 는 `CDC 부트로더` 와 `고속 USB 시리얼 브릿지` 로 구성된다. CDC 부트로더는 ATMega 16u2 MCU에도 프로그래밍이 가능하도록 하는 기능을 하고, 고속 USB 시리얼 브릿지는 컴퓨터와 ATMega 328 간의 USB to Serial 통신을 담당한다. <br>
-    > &nbsp; 쉽게 말하면, ATMega 16u2 의 기본 기능인 USB to Serial 기능은 그대로 존재하고, 추가적으로 ATMega 16u2 에도 프로그래밍이 가능하게 됐다는 것이다. <br>
+    > &nbsp; 쉽게 말하면, ATMega 16u2 의 기본 기능인 USB to Serial 기능은 그대로 존재하고, 추가적으로 ATMega 16u2 에도 프로그래밍이 가능하게 됬다는 것이다. <br>
     > &nbsp; ATMega 16u2 의 기존 부트로더를 HoodLoader2 부트로더로 변경하는 과정은 `https://luftaquila.io/blog/diy/arduino-hid-control-1/` 를 참고하였다.
 
   첫 번째 문제를 해결하고 ATMega 16u2 에도 프로그래밍이 가능하게 됨으로써, UNO 보드로 컴퓨터 마우스 움직임 처리가 가능해졌다. <br>
