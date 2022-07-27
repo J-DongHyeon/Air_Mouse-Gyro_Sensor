@@ -56,37 +56,72 @@
     > &nbsp; 다른 MCU를 사용하는 보드를 찾던 도중 `ATMega 32u4 MCU` 를 사용하는 `Leonardo 보드` 를 찾게 되었고, 이 보드를 이용하여 `Air Mouse` 제작을 시도하였다.
 
 - ## 시나리오 2.
+  - 두 번째 방법으로, `아두이노 Leonardo 보드` 를 이용하여 컴퓨터의 마우스 제어를 하고자 하였다.
+  > &nbsp; Leonardo 보드는 `ATMega 32u4` 를 사용한다. ATMega 32u4 는 컴퓨터와의 USB 통신이 직접적으로 가능하며, 파일 업로드가 가능하고, I/O 핀들 제어가 가능하다. 따라서 Leonardo 보드를 이용하면 마우스 제어를 완전히 할 수 있다.
+</br></br>
 
+------------------------------------------
 
-----------------------
+# 3. 사용부품 & 구성
 
-### 레오나르도 보드를 이용하여 제작
-#### 레오나르도 보드는 ATMega32u4 MCU가 내장되어 있으므로 마우스 클릭 이벤트에 대한 처리도 할 수 있다.
+<p align= "center">
+<img src=/docs/readme_Imgs/readme_img3.PNG width=550 height=180></p> 
 
-#### 추가 사항
-#### 1. 더블 클릭 기능의 버튼을 추가하였다.
-> 공중에서 클릭을 하기 때문에 클릭할 때 마다 마우스에 미세한 흔들림이 있다. 따라서 좌클릭을 빠르게 두 번 하는 것이 힘드므로 더블 클릭 버튼을 추가로 만들었다.
-#### 2. Potentiometer를 추가함으로써 마우스의 감도 조절이 가능하도록 하였다.
+<p align= "center">
+<img src=/docs/readme_Imgs/readme_img4.PNG width=450 height=140></p>
 
-----------------------
-#### 회로도
+-
+  - Arduino Leonardo Board
+  - MPU 6050
+  - Potentiometer
+  - Push Button X3
+  - 10K ohm Resister X3
+<br>
 
-<img width="525" alt="2022-02-11 23;42;17" src="https://user-images.githubusercontent.com/86474141/153612426-43d47189-f7e1-48b8-87ae-2da279a00383.PNG">
+  > &nbsp; 마우스 클릭 버튼을 총 3개로 구성하였다. 각 버튼은 좌 클릭, 더블 클릭, 우 클릭 기능을 한다. 공중에서 클릭을 하기 때문에 클릭할 때마다 마우스에 미세한 흔들림이 있는데, 이 때문에 좌 클릭을 빠르게 두 번 하는 것이 힘들다. 따라서 더블 클릭 역할을 하는 버튼을 추가로 만든 것이다. <br>
+  > &nbsp; Potentiometer 로 가변 저항을 조절함으로써 마우스의 움직임 감도 조절이 가능하도록 하였다.
+</br></br>
 
-----------------------
+------------------------------------------
 
-#### 연결 사진
+# 4. 회로도
 
-![KakaoTalk_20220212_001229311](https://user-images.githubusercontent.com/86474141/153618660-6f1cdc85-c185-4b67-806b-9d827410e038.jpg)
-##### 1번 버튼 : 좌클릭, 2번 버튼 : 더블 클릭, 3번 버튼 : 우클릭, 포텐셔미터 : 마우스 감도 조절
+- ## 회로도 구상
+<p align= "center">
+<img width=450 height=300 src="https://user-images.githubusercontent.com/86474141/153612426-43d47189-f7e1-48b8-87ae-2da279a00383.PNG"></p>
+</br>
 
-----------------------
+- ## 실제 연결 모습
+<p align= "center">
+<img width=450 height=300 src=https://user-images.githubusercontent.com/86474141/153618660-6f1cdc85-c185-4b67-806b-9d827410e038.jpg></p>
+</br>
 
-#### 시연 영상
+-
+  - MPU 6050 : I2C 통신 (SDA, SCL 핀 / 2번, 3번 핀)
+  - 1번 버튼 : 좌 클릭 (13번 핀)
+  - 2번 버튼 : 더블 클릭 (12번 핀)
+  - 3번 버튼 : 우 클릭 (11번 핀)
+  - Potentiometer : A0 핀
+<br><br>
 
+------------------------------------------
 
-![ezgif com-gif-maker (13)](https://user-images.githubusercontent.com/86474141/153619403-48896342-cc71-49cc-ad53-b9442dd25513.gif)
+# 5. 시연 영상
 
-----------------------
-#### 한계점
-> 공중에서 마우스를 제어하기 때문에 클릭을 할 때 마다 마우스에 미세한 흔들림이 있다. 따라서 정확한 클릭을 하는데에 가끔씩 어려움이 있다.
+<p align= "center">
+<img width=450 height=300 src=https://user-images.githubusercontent.com/86474141/153619403-48896342-cc71-49cc-ad53-b9442dd25513.gif></p>
+<br><br>
+
+------------------------------------------
+
+# 6. 한계점
+
+> &nbsp;공중에서 마우스를 제어하는 것이기 때문에 클릭 할 때 마다 마우스에 미세한 흔들림이 있다. 따라서 처음 사용하는 사람에게는 어색할 수 있고, 정확한 클릭을 하는데에 어려움이 있을 수 있다.
+<br><br>
+
+------------------------------------------
+
+# 7. 참고 사이트
+
+#### 📙 https://luftaquila.io/blog/diy/arduino-hid-control-1/
+#### 📙 https://mosesnah.tistory.com/5
