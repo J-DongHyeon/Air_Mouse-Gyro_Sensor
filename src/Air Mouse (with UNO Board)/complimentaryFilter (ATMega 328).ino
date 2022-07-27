@@ -7,22 +7,15 @@ int16_t gyX, gyY, gyZ;
 double gyX_cal, gyY_cal, gyZ_cal;
 double ave_gyX = 0, ave_gyY = 0, ave_gyZ = 0;
 
-unsigned long now = 0;
-unsigned long past = 0;
-double dt = 0;
-
 
 void setup() {
   setting();
   ave_cal();
   Serial.begin(9600);
-  past = millis();
-
 }
 
 void loop() {
 
-  
   getData();
 
   gyX -= ave_gyX; gyY -= ave_gyY; gyZ -= ave_gyZ;
@@ -30,8 +23,6 @@ void loop() {
   gyX_cal = gyX / raw_to_gyro;
   gyY_cal = gyY / raw_to_gyro;
   gyZ_cal = gyZ / raw_to_gyro;
-
-  getDT();
   
 
 //  Serial.print("X축 각속도 : "); Serial.print(gyX_cal); Serial.print("\t");
@@ -73,8 +64,3 @@ void ave_cal() {
   ave_gyX /= 10; ave_gyY /= 10; ave_gyZ /= 10;
 }
 
-void getDT() {
-  now = millis();
-  dt = (now - past) / 1000.0;
-  past = now;
-}
